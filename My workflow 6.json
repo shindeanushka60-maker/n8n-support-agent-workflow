@@ -1,0 +1,102 @@
+{
+  "name": "My workflow 6",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "b98fb351-00da-4104-9f78-2420a2b51dc1",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9f9d48a7-a9cc-4896-868d-ed5e0f1258b4",
+      "name": "Webhook",
+      "webhookId": "b98fb351-00da-4104-9f78-2420a2b51dc1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "{{ $json.body.msg }}",
+        "options": {
+          "systemMessage": "You are a helpful support assistant answer the users question clearly and concisely."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        176,
+        0
+      ],
+      "id": "90bf5534-0a9d-4ebf-9b8b-173416bfcf9d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        192,
+        160
+      ],
+      "id": "e38aa853-f773-4065-9adb-2d92cd4f102c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "btwa0WAxWLO8DExC",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "7c340ffe-195a-4b0a-8df2-9dd4db057b78",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "37e4f46c0fe4e6846cf7e0ce9ed23f9fd28832c2903b5501b9b7842a48bd3eec"
+  },
+  "nodeGroups": [],
+  "id": "fCmCHHLrJK6E0Bwb",
+  "tags": []
+}
